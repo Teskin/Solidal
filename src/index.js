@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'normalize.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Button from './component/button';
+import Menu from './component/menu';
+import FullWidthGrid from './component/grid-layout';
 
 const App = () => (
     <MuiThemeProvider>
-        <Button/>
+        <Menu/>
+        <FullWidthGrid/>
     </MuiThemeProvider>
 );
 
