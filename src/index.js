@@ -3,10 +3,35 @@ import ReactDOM from 'react-dom';
 import 'normalize.css';
 import './App.css';
 
+import CompanyList from './component/company-list';
+
+const API_URL = "http://192.168.202.69:8080/api/"
+
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            error: null,
+            isLoaded: false,
+            companies: []
+        };
+    }
+
+    componentDidMount() {
+        fetch(`${API_URL}companies`).then(result => result.json())
+            .then(result => {
+                    this.setState({
+                        isLoaded: true,
+                        companies: result.items
+                    });
+                },
+                error => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                });
+
     }
 
     render() {
@@ -28,9 +53,13 @@ class App extends React.Component {
                         </nav>
                     </div>
                 </header>
-                <aside className="aside">2</aside>
+                <aside className="aside">
+                        2
+                </aside>
                 <main className="main">3</main>
-                <section className="section">4</section>
+                <section className="section">
+                    <CompanyList companies={this.state.companies}/>
+                </section>
                 <footer className="footer">5</footer>
             </div>
         );
