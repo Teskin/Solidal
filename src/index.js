@@ -11,14 +11,27 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="grid-container" >
-                <header className="grid-item-1">1
-                    <nav>menu</nav>
+            <div className="grid-container">
+                <header className="header">
+                    <div className="grid-header-container">
+                        <div className="title-container">
+                            <h1 id="app-title">Solidal</h1>
+                        </div>
+                        <nav>
+                            <ul>
+                                <li>Home</li>
+                                <li>Products</li>
+                                <li>Companies</li>
+                                <li>About us</li>
+                                <li>Contact us</li>
+                            </ul>
+                        </nav>
+                    </div>
                 </header>
-                <aside className="grid-item-2">2</aside>
-                <main className="grid-item-3">3</main>
-                <section className="grid-item-4">4</section>
-                <footer className="grid-item-5">5</footer>
+                <aside className="aside">2</aside>
+                <main className="main">3</main>
+                <section className="section">4</section>
+                <footer className="footer">5</footer>
             </div>
         );
     }
