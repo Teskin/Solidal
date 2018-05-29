@@ -90,3 +90,20 @@ nav ul li a {
     margin: 0;
     padding: 0;
 }
+
+.company-list {
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 5px;
+    overflow: hidden;
+}
+
+.company-list-item {
+    display: block;
+    border: 1px solid black;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0;
+    width: auto;
+    height: 25vh;
+}
