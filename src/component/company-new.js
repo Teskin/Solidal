@@ -62,14 +62,15 @@ class CompanyNew extends React.Component {
       the field properly. */}
 
             {/* We do not write this.renderTitleField() as Redux Form decides when to call the function automatically. */}
-            <Field label="Nome Azienda" name="company_name" component={this.renderField}/>
+            <Field label="Nome Azienda" name="name" component={this.renderField}/>
             <Field label="Indirizzo" name="address" component={this.renderField}/>
             <Field label="Regione" name="region" component={this.renderField}/>
-            <Field label="CAP" name="postal_code" component={this.renderField}/>
+            <Field label="CAP" name="postalCode" component={this.renderField}/>
             <Field label="Stato" name="nation" component={this.renderField}/>
             <Field label="Partita IVA" name="vatnumber" component={this.renderField}/>
             <Field label="Descrizione della tua azienda" name="description" component={this.renderField}/>
             <Field label="Proprietario" name="owner" component={this.renderField}/>
+            <Field label="Indirizzo E-mail" name="email" component={this.renderField}/>
 
             <button type="submit">Submit</button>
             <Link to="/">Cancel</Link>
@@ -93,6 +94,10 @@ function validate(values) {
 
     if (!values.address) {
         errors.address = "Inserire indirizzo";
+    }
+    
+    if (!values.email) {
+        errors.email = "Inserire indirizzo E-mail";
     }
 
     if (!values.region) {
