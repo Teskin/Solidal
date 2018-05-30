@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchCompanies} from '../actions';
+import {fetchCompanies, fetchProducts} from '../actions';
 import CompanyList from "./company-list";
+import ProductList from "./product-list";
 
 
 class MainContainer extends React.Component {
@@ -9,6 +10,7 @@ class MainContainer extends React.Component {
     // this particular case, we are going to fetch data from the reducer which will call an action.
     componentDidMount() {
         this.props.fetchCompanies();
+        this.props.fetchProducts();
     }
 
     render() {
@@ -30,7 +32,7 @@ class MainContainer extends React.Component {
                 </div>
             </header>
             <aside className="aside">
-                2
+                <ProductList products={this.props.products}/>
             </aside>
             <main className="main">3</main>
             <section className="section">
@@ -42,7 +44,10 @@ class MainContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-    return {companies: state.companies}
+    return {
+        companies: state.companies,
+        products: state.products
+    }
 }
 
-export default connect(mapStateToProps, {fetchCompanies})(MainContainer);
+export default connect(mapStateToProps, {fetchCompanies, fetchProducts})(MainContainer);

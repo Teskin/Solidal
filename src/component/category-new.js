@@ -2,13 +2,13 @@ import React from "react";
 import {Field, reduxForm} from 'redux-form';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {createCompany} from '../actions';
+import {createCategory} from '../actions';
 
 // Field component is a React component which is wired up with redux form.
 // reduxForm is a function is very similar to the connect helper of React-Redux.
 // It allows our component to talk directly to the redux store.
 
-class CompanyNew extends React.Component {
+class CategoryNew extends React.Component {
     // Conventional field object parameter contains some event handlers we need to wire up to the JSX.
     renderField(field) {
         // Destructuring
@@ -45,7 +45,7 @@ class CompanyNew extends React.Component {
 
         console.log(values);
         // this === component
-        this.props.createCompany(values, () => {
+        this.props.createCategory(values, () => {
             this.props.history.push('/');
         });
     }
@@ -62,15 +62,8 @@ class CompanyNew extends React.Component {
       the field properly. */}
 
             {/* We do not write this.renderTitleField() as Redux Form decides when to call the function automatically. */}
-            <Field label="Nome Azienda" name="name" component={this.renderField}/>
-            <Field label="Indirizzo" name="address" component={this.renderField}/>
-            <Field label="Regione" name="region" component={this.renderField}/>
-            <Field label="CAP" name="postalCode" component={this.renderField}/>
-            <Field label="Stato" name="nation" component={this.renderField}/>
-            <Field label="Partita IVA" name="vatnumber" component={this.renderField}/>
-            <Field label="Descrizione della tua azienda" name="description" component={this.renderField}/>
-            <Field label="Proprietario" name="owner" component={this.renderField}/>
-            <Field label="Indirizzo E-mail" name="email" component={this.renderField}/>
+            <Field label="Nome categoria" name="name" component={this.renderField}/>
+            <Field label="Descrizione category" name="description" component={this.renderField}/>
 
             <button type="submit">Submit</button>
             <Link to="/">Cancel</Link>
@@ -89,39 +82,11 @@ function validate(values) {
 
     // Validate the inputs from 'values'
     if (!values.name) {
-        errors.name = "Inserire nome dell'azienda"
-    }
-
-    if (!values.address) {
-        errors.address = "Inserire indirizzo";
-    }
-
-    if (!values.email) {
-        errors.email = "Inserire indirizzo E-mail";
-    }
-
-    if (!values.region) {
-        errors.region = "Inserire regione";
-    }
-
-    if (!values.postal_code) {
-        errors.postal_code = "Inserire CAP";
-    }
-
-    if (!values.nation) {
-        errors.nation = "Inserire stato/nazione";
-    }
-
-    if (!values.vatnumber) {
-        errors.vatnumbers = "Inserire Partita IVA";
+        errors.name = "Inserire nome dell'categoria"
     }
 
     if (!values.description) {
-        errors.description = "Inserire la descrizione della tua azienda";
-    }
-
-    if (!values.owner) {
-        errors.owner = "Inserire nome del propretario dell'azienda";
+        errors.description = "Inserire la descrizione della tua categoria";
     }
 
     // If errors has any properties then the submit won`t be performed.
@@ -133,8 +98,8 @@ function validate(values) {
 // We intend 'form' as name of the form. You may want to show multiple forms on a single page.
 export default reduxForm({
     validate,
-    form: "NewCompanyForm"
-})(connect(null, {createCompany})(CompanyNew));
+    form: "NewCategoryForm"
+})(connect(null, {createCategory})(CategoryNew));
 
 
 // if you create another component e.g. posts-edit.js the reduxForm would merge together.

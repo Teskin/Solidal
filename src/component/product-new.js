@@ -2,15 +2,15 @@ import React from "react";
 import {Field, reduxForm} from 'redux-form';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {createCompany} from '../actions';
+import {createProduct} from '../actions';
 
 // Field component is a React component which is wired up with redux form.
 // reduxForm is a function is very similar to the connect helper of React-Redux.
 // It allows our component to talk directly to the redux store.
 
-class CompanyNew extends React.Component {
+class ProductNew extends React.Component {
     // Conventional field object parameter contains some event handlers we need to wire up to the JSX.
-    renderField(field) {
+    renderFieldText(field) {
         // Destructuring
         const {
             meta: {
@@ -37,6 +37,34 @@ class CompanyNew extends React.Component {
         </div>);
     }
 
+    renderFieldNumber(field) {
+
+        // Destructuring
+        const {
+            meta: {
+                touched,
+                error
+            }
+        } = field;
+
+        return (<div>
+            {/* // The field component does not recognize magically the input tag. */}
+            {/* We use the notation below to make that connection. */}
+            {/* ... dots help us to get all the properties needed in field.input without writing
+        each props such as field.input.onChange; */}
+
+            <label>{field.label}</label>
+            {/* // This meta property is automatically added to the field object from
+      our validate function. */}
+            <input type="number" {...field.input} />
+
+            {/* Touched already managed by Redux Form */}
+            <span>
+                {touched ? error : ''}
+            </span>
+        </div>);
+    }
+
     // React-Router comes with many different helpers that you may utilize. For this case, it is appropriate
     // using history as we need an automatic callback function that renders the previous page as the POST
     // has been made accordingly. With 'push' props onSubmit the user will be redirected automatically to the main page.
@@ -45,7 +73,7 @@ class CompanyNew extends React.Component {
 
         console.log(values);
         // this === component
-        this.props.createCompany(values, () => {
+        this.props.createProduct(values, () => {
             this.props.history.push('/');
         });
     }
@@ -62,15 +90,10 @@ class CompanyNew extends React.Component {
       the field properly. */}
 
             {/* We do not write this.renderTitleField() as Redux Form decides when to call the function automatically. */}
-            <Field label="Nome Azienda" name="name" component={this.renderField}/>
-            <Field label="Indirizzo" name="address" component={this.renderField}/>
-            <Field label="Regione" name="region" component={this.renderField}/>
-            <Field label="CAP" name="postalCode" component={this.renderField}/>
-            <Field label="Stato" name="nation" component={this.renderField}/>
-            <Field label="Partita IVA" name="vatnumber" component={this.renderField}/>
-            <Field label="Descrizione della tua azienda" name="description" component={this.renderField}/>
-            <Field label="Proprietario" name="owner" component={this.renderField}/>
-            <Field label="Indirizzo E-mail" name="email" component={this.renderField}/>
+            <Field label="Nome Prodotto" name="name" component={this.renderFieldText}/>
+            <Field label="Descrizione" name="description" component={this.renderFieldText}/>
+            <Field label="Prezzo" name="price" component={this.renderFieldNumber}/>
+            <Field label="Categoria" name="category" component={this.renderFieldNumber}/>
 
             <button type="submit">Submit</button>
             <Link to="/">Cancel</Link>
@@ -92,39 +115,18 @@ function validate(values) {
         errors.name = "Inserire nome dell'azienda"
     }
 
-    if (!values.address) {
-        errors.address = "Inserire indirizzo";
-    }
-
-    if (!values.email) {
-        errors.email = "Inserire indirizzo E-mail";
-    }
-
-    if (!values.region) {
-        errors.region = "Inserire regione";
-    }
-
-    if (!values.postal_code) {
-        errors.postal_code = "Inserire CAP";
-    }
-
-    if (!values.nation) {
-        errors.nation = "Inserire stato/nazione";
-    }
-
-    if (!values.vatnumber) {
-        errors.vatnumbers = "Inserire Partita IVA";
-    }
-
     if (!values.description) {
-        errors.description = "Inserire la descrizione della tua azienda";
+        errors.description = "Inserire descrizione";
+    }
+    
+    if (!values.price) {
+        errors.price = "Inserire descrizione";
+    }  
+    
+    if (!values.category) {
+        errors.category = "Inserire descrizione";
     }
 
-    if (!values.owner) {
-        errors.owner = "Inserire nome del propretario dell'azienda";
-    }
-
-    // If errors has any properties then the submit won`t be performed.
     return errors;
 }
 
@@ -133,8 +135,8 @@ function validate(values) {
 // We intend 'form' as name of the form. You may want to show multiple forms on a single page.
 export default reduxForm({
     validate,
-    form: "NewCompanyForm"
-})(connect(null, {createCompany})(CompanyNew));
+    form: "NewProductForm"
+})(connect(null, {createProduct})(ProductNew));
 
 
 // if you create another component e.g. posts-edit.js the reduxForm would merge together.

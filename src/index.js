@@ -9,6 +9,8 @@ import './App.css';
 import reducers from './reducers';
 import MainContainer from './component/main-container';
 import CompanyNew from './component/company-new';
+import ProductNew from './component/product-new';
+import CategoryNew from './component/category-new';
 
 // Middleware redux-promise that stands between ajax calls and redux;
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
@@ -25,6 +27,8 @@ ReactDOM.render(
                           related component. It must stay as second position or it would go in conflicts with the 'new' above. */}
                 {/*<Route path="/company/:id" component={test}/>*/}
                 <Route path="/company/new" component={CompanyNew}/>
+                <Route path="/category/new" component={CategoryNew}/>
+                <Route path="/product/new" component={ProductNew}/>
                 <Route path="/" component={MainContainer}/>
             </Switch>
         </BrowserRouter>

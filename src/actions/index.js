@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const FETCH_COMPANIES = 'fetch_companies';
 export const FETCH_PRODUCTS = 'fetch_products';
-export const FETCH_CATEGORIES = 'feth_categories';
+export const FETCH_CATEGORIES = 'fetch_categories';
 
 export const CREATE_COMPANY = 'create_company';
 export const CREATE_PRODUCT = 'create_product';
@@ -18,10 +18,32 @@ export function fetchCompanies() {
     return {type: FETCH_COMPANIES, payload: request};
 }
 
+export function fetchProducts() {
+    const request = axios.get(`${API_URL}/products`);
+
+    return {type: FETCH_PRODUCTS, payload: request};
+}
+
 // The callback parameter is called whenever the condition relate to the first parameter is respected.
 // As a consequence, the callback function will be called.
 export function createCompany(values, callback) {
     const request = axios.post(`${API_URL}/company`, values).then(() => {
+        callback();
+    });
+
+    return {type: CREATE_COMPANY, payload: request}
+}
+
+export function createProduct(values, callback) {
+    const request = axios.post(`${API_URL}/product`, values).then(() => {
+        callback();
+    });
+
+    return {type: CREATE_COMPANY, payload: request}
+}
+
+export function createCategory(values, callback) {
+    const request = axios.post(`${API_URL}/category`, values).then(() => {
         callback();
     });
 
