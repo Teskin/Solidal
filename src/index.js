@@ -8,6 +8,7 @@ import 'normalize.css';
 import './App.css';
 import reducers from './reducers';
 import MainContainer from './component/main-container';
+import CompanyNew from './component/company-new';
 
 // Middleware redux-promise that stands between ajax calls and redux;
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
@@ -23,6 +24,7 @@ ReactDOM.render(
                           It will take whichever value or properties that it receives and will move it to the
                           related component. It must stay as second position or it would go in conflicts with the 'new' above. */}
                 {/*<Route path="/company/:id" component={test}/>*/}
+                <Route path="/company/new" component={CompanyNew}/>
                 <Route path="/" component={MainContainer}/>
             </Switch>
         </BrowserRouter>
